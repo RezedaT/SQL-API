@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.netology'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+repositories {
+    mavenCentral()
+}
+
+tasks {
+    wrapper {
+        gradleVersion = '8.5'
+        distributionType = Wrapper.DistributionType.ALL
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testImplementation 'com.mysql:mysql-connector-j:8.3.0'
+    testImplementation 'commons-dbutils:commons-dbutils:1.8.1'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'com.google.code.gson:gson:2.10.1'
+    testImplementation 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'db.url', System.getProperty('db.url',"jdbc:mysql://localhost:3306/app")
+    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
+}
