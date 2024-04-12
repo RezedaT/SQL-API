@@ -59,8 +59,8 @@ public class APITest {
         var amount = DataHelper.generateValidAmount(secondCardBalance);
         var expectedDBalanceFirstCard = firstCardBalance + amount;
         var expectedDBalanceSecondCard = secondCardBalance - amount;
-        var transferInfo = new APIHelper.APITransferInfo(DataHelper.getFirstCardInfo().getCardNumber(),
-                DataHelper.getSecondCardInfo().getCardNumber(), amount);
+        var transferInfo = new APIHelper.APITransferInfo(DataHelper.getSecondCardInfo().getCardNumber(),
+                DataHelper.getFirstCardInfo().getCardNumber(), amount);
         APIHelper.generateQueryToTransfer(tokenInfo.getToken(), transferInfo, 200);
         cardBalance = APIHelper.sendQueryToGetCardsBalances(tokenInfo.getToken(), 200);
         var actualBalanceFirstCard = cardBalance.get(DataHelper.getFirstCardInfo().getTestId());
