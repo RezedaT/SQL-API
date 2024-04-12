@@ -55,11 +55,11 @@ APIHelper {
                 .extract()
                 .body()
                 .as(APICardInfo[].class);
-        Map<String, Integer> cardsBalances = new HashMap<>();
+        Map<String, Integer> cardBalance = new HashMap<>();
         for (APICardInfo cardInfo : cardsInfo) {
-            cardsBalances.put(cardInfo.getTestId(), cardInfo.getBalance());
+            cardBalance.put(cardInfo.getId(), cardInfo.getBalance());
         }
-        return cardsBalances;
+        return cardBalance;
     }
 
     public static void generateQueryToTransfer(String token, APITransferInfo transferInfo, Integer statusCode) {
@@ -72,7 +72,6 @@ APIHelper {
                 .then()
                 .statusCode(statusCode);
     }
-
     @Value
     public static class APITokenInfo {
         String token;
@@ -80,11 +79,10 @@ APIHelper {
 
     @Value
     public static class APICardInfo {
-        String cardNumber;
-        String testId;
+        String id;
+        String number;
         Integer balance;
-
-      }
+    }
 
     @Value
     public static class APITransferInfo {
